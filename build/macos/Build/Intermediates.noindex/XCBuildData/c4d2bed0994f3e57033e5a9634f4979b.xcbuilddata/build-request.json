@@ -1,0 +1,64 @@
+{
+  "buildCommand" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildOnly"
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "18c1723432283e0cc55f10a6dcfd9e02a26d6e580d3222b86d62fb80ec380c14"
+    }
+  ],
+  "containerPath" : "/Users/feherstefan/school/anul3/mobileDev/monopoly_game/macos/Runner.xcworkspace",
+  "continueBuildingAfterErrors" : false,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "arm64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "macosx",
+      "sdk" : "macosx14.0",
+      "sdkVariant" : "macos",
+      "supportedArchitectures" : [
+        "arm64e",
+        "arm64",
+        "x86_64"
+      ],
+      "targetArchitecture" : "arm64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/feherstefan/school/anul3/mobileDev/monopoly_game/build/macos/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/feherstefan/school/anul3/mobileDev/monopoly_game/build/macos/Build/Products",
+      "derivedDataPath" : "/Users/feherstefan/school/anul3/mobileDev/monopoly_game/build/macos",
+      "indexDataStoreFolderPath" : "/Users/feherstefan/school/anul3/mobileDev/monopoly_game/build/macos/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/feherstefan/school/anul3/mobileDev/monopoly_game/build/macos/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Users/feherstefan/school/anul3/mobileDev/monopoly_game/build/macos/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "commandLine" : {
+        "table" : {
+          "COMPILER_INDEX_STORE_ENABLE" : "NO",
+          "OBJROOT" : "/Users/feherstefan/school/anul3/mobileDev/monopoly_game/build/macos/Build/Intermediates.noindex",
+          "SYMROOT" : "/Users/feherstefan/school/anul3/mobileDev/monopoly_game/build/macos/Build/Products"
+        }
+      },
+      "synthesized" : {
+        "table" : {
+          "ACTION" : "build",
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_XOJIT_PREVIEWS" : "NO"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

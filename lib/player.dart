@@ -5,5 +5,7 @@ class Player {
   int money;
   List<Property> properties;
 
-  Player({required this.name, this.money = 1500, this.properties = const []});
+Player({required this.name, this.money = 1500, List<Property>? properties})
+  : properties = properties ?? [];
+
 }

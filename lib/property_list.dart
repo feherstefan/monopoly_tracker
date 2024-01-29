@@ -5,13 +5,13 @@ class PropertyList extends StatelessWidget {
   final List<Property> properties;
   final Function(Property) onNavigate;
 
-  PropertyList({required this.properties, required this.onNavigate});
+  const PropertyList({super.key, required this.properties, required this.onNavigate});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Properties'),
+        title: const Text('Properties'),
       ),
       body: ListView.builder(
         itemCount: properties.length,

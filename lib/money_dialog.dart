@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MoneyDialog extends StatefulWidget {
   final Function(int) onMoneyChanged;
 
-  MoneyDialog({required this.onMoneyChanged});
+  const MoneyDialog({super.key, required this.onMoneyChanged});
 
   @override
   _MoneyDialogState createState() => _MoneyDialogState();
@@ -27,10 +27,10 @@ class _MoneyDialogState extends State<MoneyDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Add/Subtract Money'),
+      title: const Text('Add/Subtract Money'),
       content: TextField(
         controller: _controller,
-        decoration: InputDecoration(hintText: "Enter amount"),
+        decoration: const InputDecoration(hintText: "Enter amount"),
         keyboardType: TextInputType.number,
       ),
       actions: <Widget>[
@@ -38,7 +38,7 @@ class _MoneyDialogState extends State<MoneyDialog> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
         TextButton(
           onPressed: () {
@@ -48,7 +48,7 @@ class _MoneyDialogState extends State<MoneyDialog> {
               Navigator.of(context).pop();
             }
           },
-          child: Text('Confirm'),
+          child: const Text('Confirm'),
         ),
       ],
     );

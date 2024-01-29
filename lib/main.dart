@@ -6,13 +6,14 @@ import 'player_list.dart';
 import 'player_details_screen.dart';
 import 'property.dart';
 import 'property_list.dart';
-import 'property_details_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,12 +22,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -108,9 +111,9 @@ Future<List<Property>> loadProperties() async {
     if (isLoading) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Monopoly Game Tracker'),
+          title: const Text('Monopoly Game Tracker'),
         ),
-        body: Center(
+        body: const Center(
           child: CircularProgressIndicator(),
         ),
       );
@@ -118,10 +121,10 @@ Future<List<Property>> loadProperties() async {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Monopoly Game Tracker'),
+        title: const Text('Monopoly Game Tracker'),
         actions: [
           IconButton(
-            icon: Icon(Icons.home),
+            icon: const Icon(Icons.home),
             onPressed: () {
               Navigator.of(context).popUntil((route) => route.isFirst);
             },
@@ -132,20 +135,20 @@ Future<List<Property>> loadProperties() async {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              child: Text('Menu'),
+            const DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
+              child: Text('Menu'),
             ),
             ListTile(
-              title: Text('Home'),
+              title: const Text('Home'),
               onTap: () {
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },
             ),
             ListTile(
-              title: Text('Properties'),
+              title: const Text('Properties'),
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => PropertyList(properties: availableProperties, onNavigate: (property) {
@@ -165,7 +168,7 @@ Future<List<Property>> loadProperties() async {
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddPlayerDialog,
         tooltip: 'Add Player',
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -192,24 +195,24 @@ Future<List<Property>> loadProperties() async {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Add New Player'),
+          title: const Text('Add New Player'),
           content: TextField(
             controller: controller,
-            decoration: InputDecoration(hintText: "Enter player's name"),
+            decoration: const InputDecoration(hintText: "Enter player's name"),
           ),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
                 _addNewPlayer(controller.text);
                 Navigator.of(context).pop();
               },
-              child: Text('Add'),
+              child: const Text('Add'),
             ),
           ],
         );

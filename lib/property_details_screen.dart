@@ -4,7 +4,7 @@ import 'property.dart';
 class PropertyDetailsScreen extends StatelessWidget {
   final Property property;
 
-  PropertyDetailsScreen({required this.property});
+  const PropertyDetailsScreen({super.key, required this.property});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class PropertyDetailsScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         children: [
-          Text('$label: ', style: TextStyle(fontWeight: FontWeight.bold)),
+          Text('$label: ', style: const TextStyle(fontWeight: FontWeight.bold)),
           Text(value),
         ],
       ),

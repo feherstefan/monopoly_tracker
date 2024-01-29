@@ -6,7 +6,7 @@ class PlayerList extends StatelessWidget {
   final Function onDelete;
   final Function onNavigate;
 
-  PlayerList({required this.players, required this.onDelete, required this.onNavigate});
+  const PlayerList({super.key, required this.players, required this.onDelete, required this.onNavigate});
 
   @override
   Widget build(BuildContext context) {

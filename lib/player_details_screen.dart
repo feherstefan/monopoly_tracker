@@ -11,7 +11,7 @@ class PlayerDetailsScreen extends StatelessWidget {
   final Function(Player, Property) onBuyHouse;
   final Function(Player, Property) onMortgage;
 
-  PlayerDetailsScreen({
+  const PlayerDetailsScreen({super.key, 
     required this.player,
     required this.availableProperties,
     required this.onMoneyChanged,
@@ -43,7 +43,7 @@ class PlayerDetailsScreen extends StatelessWidget {
     return ListTile(
       title: Text('Money: \$${player.money}'),
       trailing: IconButton(
-        icon: Icon(Icons.add),
+        icon: const Icon(Icons.add),
         onPressed: () => _showMoneyDialog(context, true),
       ),
     );
@@ -51,7 +51,7 @@ class PlayerDetailsScreen extends StatelessWidget {
 
   ListTile _buildPropertiesTile() {
     return ListTile(
-      title: Text('Properties'),
+      title: const Text('Properties'),
       subtitle: Text(player.properties.isNotEmpty
           ? player.properties.map((prop) => prop.name).join(', ')
           : 'No properties'),
@@ -60,7 +60,7 @@ class PlayerDetailsScreen extends StatelessWidget {
 
   ListTile _buildBuyPropertyTile() {
     return ListTile(
-      title: Text('Buy Property'),
+      title: const Text('Buy Property'),
       trailing: PopupMenuButton<Property>(
         onSelected: (property) => onBuyProperty(player, property),
         itemBuilder: (context) => availableProperties
@@ -77,7 +77,7 @@ class PlayerDetailsScreen extends StatelessWidget {
 
   ListTile _buildBuyHouseHotelTile() {
     return ListTile(
-      title: Text('Buy House/Hotel'),
+      title: const Text('Buy House/Hotel'),
       trailing: PopupMenuButton<Property>(
         onSelected: (property) => onBuyHouse(player, property),
         itemBuilder: (context) => player.properties
@@ -95,7 +95,7 @@ class PlayerDetailsScreen extends StatelessWidget {
 
   ListTile _buildMortgageUnmortgageTile() {
     return ListTile(
-      title: Text('Mortgage/Unmortgage'),
+      title: const Text('Mortgage/Unmortgage'),
       trailing: PopupMenuButton<Property>(
         onSelected: (property) => onMortgage(player, property),
         itemBuilder: (context) => player.properties
@@ -112,9 +112,9 @@ class PlayerDetailsScreen extends StatelessWidget {
 
   ListTile _buildGetSalaryTile() {
     return ListTile(
-      title: Text('Get Salary'),
+      title: const Text('Get Salary'),
       trailing: IconButton(
-        icon: Icon(Icons.monetization_on),
+        icon: const Icon(Icons.monetization_on),
         onPressed: () => onMoneyChanged(player, 200), // Assuming $200 as salary
       ),
     );

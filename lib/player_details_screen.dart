@@ -1,9 +1,12 @@
+// Importing necessary Flutter material and custom classes
 import 'package:flutter/material.dart';
 import 'player.dart';
 import 'money_dialog.dart';
 import 'property.dart';
 
+// PlayerDetailsScreen class displays detailed information about a player
 class PlayerDetailsScreen extends StatelessWidget {
+  // Variables to hold player details and functions for various actions
   final Player player;
   final List<Property> availableProperties;
   final Function(Player, int) onMoneyChanged;
@@ -11,6 +14,7 @@ class PlayerDetailsScreen extends StatelessWidget {
   final Function(Player, Property) onBuyHouse;
   final Function(Player, Property) onMortgage;
 
+  // Constructor to initialize the class with required data
   const PlayerDetailsScreen({super.key, 
     required this.player,
     required this.availableProperties,
@@ -20,12 +24,15 @@ class PlayerDetailsScreen extends StatelessWidget {
     required this.onMortgage,
   });
 
+  // Building the UI of the PlayerDetailsScreen
   @override
   Widget build(BuildContext context) {
+    // Scaffold provides the structure for the screen
     return Scaffold(
       appBar: AppBar(
         title: Text(player.name),
       ),
+      // ListView to display a list of options and information
       body: ListView(
         children: [
           _buildMoneyTile(context),
@@ -39,6 +46,7 @@ class PlayerDetailsScreen extends StatelessWidget {
     );
   }
 
+  // Widget to display and modify the player's money
   ListTile _buildMoneyTile(BuildContext context) {
     return ListTile(
       title: Text('Money: \$${player.money}'),
@@ -49,6 +57,7 @@ class PlayerDetailsScreen extends StatelessWidget {
     );
   }
 
+  // Widget to display the player's properties
   ListTile _buildPropertiesTile() {
     return ListTile(
       title: const Text('Properties'),
@@ -58,6 +67,7 @@ class PlayerDetailsScreen extends StatelessWidget {
     );
   }
 
+  // Widget to buy a property
   ListTile _buildBuyPropertyTile() {
     return ListTile(
       title: const Text('Buy Property'),
@@ -75,6 +85,7 @@ class PlayerDetailsScreen extends StatelessWidget {
     );
   }
 
+  // Widget to buy a house or hotel
   ListTile _buildBuyHouseHotelTile() {
     return ListTile(
       title: const Text('Buy House/Hotel'),
@@ -93,6 +104,7 @@ class PlayerDetailsScreen extends StatelessWidget {
     );
   }
 
+  // Widget to mortgage or unmortgage properties
   ListTile _buildMortgageUnmortgageTile() {
     return ListTile(
       title: const Text('Mortgage/Unmortgage'),
@@ -110,6 +122,7 @@ class PlayerDetailsScreen extends StatelessWidget {
     );
   }
 
+  // Widget to get salary
   ListTile _buildGetSalaryTile() {
     return ListTile(
       title: const Text('Get Salary'),
@@ -120,6 +133,7 @@ class PlayerDetailsScreen extends StatelessWidget {
     );
   }
 
+  // Function to show dialog for adding or subtracting money
   void _showMoneyDialog(BuildContext context, bool isAddingMoney) {
     showDialog(
       context: context,

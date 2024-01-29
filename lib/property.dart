@@ -1,15 +1,17 @@
 class Property {
+  // Basic property details
   String name;
   String id;
   int? position;
   int? price;
   int? rent;
-  List<int>? multipliedRent;
+  List<int>? multipliedRent; // Rent values depending on the number of houses
   int numberOfHouses = 0;
-  int? houseCost; // Added house cost field
-  bool isMortgaged = false; // Added mortgage status field
-  int? mortgageValue; // Added mortgage value field
+  int? houseCost; // Cost for buying a house on the property
+  bool isMortgaged = false; // Tracks if the property is mortgaged
+  int? mortgageValue; // The value of mortgaging the property
 
+  // Constructor for initializing the property
   Property({
     required this.name,
     required this.id,
@@ -21,6 +23,7 @@ class Property {
     this.mortgageValue,
   });
 
+  // Factory constructor to create a Property from a JSON map
   factory Property.fromJson(Map<String, dynamic> json) {
     return Property(
       name: json['name'] as String,
@@ -34,8 +37,10 @@ class Property {
     );
   }
 
+  // Getter to calculate the rent when a hotel is present
   int get rentWithHotel => rentWithHouses(5);
 
+  // Method to calculate rent based on the number of houses
   int rentWithHouses(int numberOfHouses) {
     if (numberOfHouses == 5) {
       return rentWithHotel;
@@ -45,29 +50,33 @@ class Property {
     return rent ?? 0;
   }
 
+  // Method to buy a house on the property
   void buyHouse() {
     if (numberOfHouses < 5) {
       numberOfHouses++;
     }
   }
 
+  // Method to mortgage the property
   void mortgageProperty() {
     if (!isMortgaged) {
       isMortgaged = true;
     }
   }
 
+  // Method to unmortgage the property
   void unmortgageProperty() {
     if (isMortgaged) {
       isMortgaged = false;
     }
   }
 
+  // Logic to determine if a house can be built on this property
   bool get canBuild {
-    // Add your logic here for determining if a house can be built
-    // For example:
+    // Example: a house can be built if the property is not mortgaged and has fewer than 5 houses
     return !isMortgaged && numberOfHouses < 5;
   }
 
+  // Getter to return the current rent based on the number of houses
   int get currentRent => rentWithHouses(numberOfHouses);
 }

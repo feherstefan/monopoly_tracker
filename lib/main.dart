@@ -1,21 +1,27 @@
+// Import necessary Dart and Flutter packages
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+
+// Import custom classes for the application
 import 'player.dart';
 import 'player_list.dart';
 import 'player_details_screen.dart';
 import 'property.dart';
 import 'property_list.dart';
 
+// Entry point of the Flutter application
 void main() {
   runApp(const MyApp());
 }
 
+// MyApp is the root widget of the application
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // MaterialApp is the starting point of the material design app
     return MaterialApp(
       title: 'Monopoly Game Tracker',
       theme: ThemeData(
@@ -27,6 +33,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// MyHomePage is the main screen of the app
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -34,15 +41,19 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+// State for MyHomePage
 class _MyHomePageState extends State<MyHomePage> {
+  // List to store players and properties
   List<Player> players = [];
   List<Property> properties = [];
   List<Property> availableProperties = [];
+  // Flag to check if data is still loading
   bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
+    // Load properties from a JSON file
     loadProperties().then((loadedProperties) {
       setState(() {
         properties = loadedProperties;
@@ -52,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+// Function to load properties from a JSON asset
 Future<List<Property>> loadProperties() async {
   final jsonString = await rootBundle.loadString('assets/properties.json');
   final jsonResponse = json.decode(jsonString);
@@ -59,25 +71,28 @@ Future<List<Property>> loadProperties() async {
   return jsonProperties.map((json) => Property.fromJson(json)).toList();
 }
 
-
+  // Function to add a new player
   void _addNewPlayer(String playerName) {
     setState(() {
       players.add(Player(name: playerName));
     });
   }
 
+  // Function to delete a player
   void _deletePlayer(int index) {
     setState(() {
       players.removeAt(index);
     });
   }
 
+  // Function to update a player's money
   void _updatePlayerMoney(Player player, int amount) {
     setState(() {
       player.money += amount;
     });
   }
 
+  // Function to handle property buying
   void _buyProperty(Player player, Property property) {
     if (property.price != null && player.money >= property.price! && availableProperties.contains(property)) {
       setState(() {
@@ -88,6 +103,7 @@ Future<List<Property>> loadProperties() async {
     }
   }
 
+  // Function to handle buying houses on a property
   void _buyHouse(Player player, Property property) {
     if (property.houseCost != null && player.money >= property.houseCost! && player.properties.contains(property)) {
       setState(() {
@@ -97,6 +113,7 @@ Future<List<Property>> loadProperties() async {
     }
   }
 
+  // Function to mortgage a property
   void _mortgageProperty(Player player, Property property) {
     if (property.mortgageValue != null && player.properties.contains(property) && !property.isMortgaged) {
       setState(() {
@@ -106,8 +123,10 @@ Future<List<Property>> loadProperties() async {
     }
   }
 
+  // Building the UI for the app
   @override
   Widget build(BuildContext context) {
+    // Display a loading indicator while data is being loaded
     if (isLoading) {
       return Scaffold(
         appBar: AppBar(
@@ -119,6 +138,7 @@ Future<List<Property>> loadProperties() async {
       );
     }
 
+    // Main layout when data is loaded
     return Scaffold(
       appBar: AppBar(
         title: const Text('Monopoly Game Tracker'),
@@ -132,6 +152,7 @@ Future<List<Property>> loadProperties() async {
         ],
       ),
       drawer: Drawer(
+        // Navigation drawer with menu options
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -150,9 +171,10 @@ Future<List<Property>> loadProperties() async {
             ListTile(
               title: const Text('Properties'),
               onTap: () {
+                // Navigate to the property list screen
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => PropertyList(properties: availableProperties, onNavigate: (property) {
-                    // Define what you want to do when a property is navigated to
+                    // Define actions when a property is navigated to
                   })),
                 );
               },
@@ -173,6 +195,7 @@ Future<List<Property>> loadProperties() async {
     );
   }
 
+  // Function to navigate to the player details screen
   void _navigateToPlayer(Player player) {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -189,6 +212,7 @@ Future<List<Property>> loadProperties() async {
     );
   }
 
+  // Function to show dialog for adding a new player
   void _showAddPlayerDialog() {
     TextEditingController controller = TextEditingController();
     showDialog(

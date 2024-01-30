@@ -29,16 +29,16 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primarySwatch: Colors.blue,
         primaryColor: Colors.blue,
-        colorScheme: ColorScheme.dark(
+        colorScheme: const ColorScheme.dark(
           primary: Colors.blue,
           secondary: Colors.blueAccent, // Previously known as accentColor
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(
           color: Colors.blueGrey[900],
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white),
         ),
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: Colors.blueAccent,
         ),
         // Add other dark theme customizations here

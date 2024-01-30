@@ -1,35 +1,44 @@
-// Importing necessary Flutter material package and Property class
 import 'package:flutter/material.dart';
 import 'property.dart';
+import 'dart:math';
 
-// PropertyList is a StatelessWidget for displaying a list of properties
 class PropertyList extends StatelessWidget {
-  // List of Property objects to display
   final List<Property> properties;
-  // Function to handle navigation when a property is tapped
   final Function(Property) onNavigate;
 
-  // Constructor with required properties list and onNavigate function
   const PropertyList({super.key, required this.properties, required this.onNavigate});
+
+
+Color _groupColor(String groupName) {
+  final hash = groupName.codeUnits.fold(0, (prev, element) => prev + element);
+  final random = Random(hash);
+  return Color.fromRGBO(
+    random.nextInt(256),
+    random.nextInt(256),
+    random.nextInt(256),
+    1,
+  );
+}
 
   @override
   Widget build(BuildContext context) {
-    // Scaffold provides the basic visual layout structure of the screen
+    // Step 3: Update PropertyList Widget
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Properties'), // AppBar title
+        title: const Text('Properties'),
       ),
-      // ListView.builder creates a list of items from the properties list
       body: ListView.builder(
-        itemCount: properties.length, // Number of items in the list
+        itemCount: properties.length,
         itemBuilder: (context, index) {
-          // Each item is wrapped in a Card for a neater appearance
+          // Get color for the property group
+          Color groupColor = _groupColor(properties[index].group);
+
           return Card(
             child: ListTile(
-              title: Text(properties[index].name), // Property name displayed as the title
-              subtitle: Text('\$${properties[index].price}'), // Property price displayed as the subtitle
-              // onTap triggers the onNavigate function passing the selected property
+              title: Text(properties[index].name),
+              subtitle: Text('\$${properties[index].price}'),
               onTap: () => onNavigate(properties[index]),
+              tileColor: groupColor.withOpacity(0.2), // Apply group color with some transparency
             ),
           );
         },

@@ -19,15 +19,32 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
   @override
   Widget build(BuildContext context) {
-    // MaterialApp is the starting point of the material design app
     return MaterialApp(
       title: 'Monopoly Game Tracker',
-      theme: ThemeData(
+      // Dark theme settings
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
         primarySwatch: Colors.blue,
+        primaryColor: Colors.blue,
+        colorScheme: ColorScheme.dark(
+          primary: Colors.blue,
+          secondary: Colors.blueAccent, // Previously known as accentColor
+        ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        appBarTheme: AppBarTheme(
+          color: Colors.blueGrey[900],
+          iconTheme: IconThemeData(color: Colors.white),
+        ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.blueAccent,
+        ),
+        // Add other dark theme customizations here
       ),
+      // Enforce dark theme
+      themeMode: ThemeMode.dark,
       home: const MyHomePage(),
     );
   }
@@ -63,13 +80,13 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-// Function to load properties from a JSON asset
-Future<List<Property>> loadProperties() async {
-  final jsonString = await rootBundle.loadString('assets/properties.json');
-  final jsonResponse = json.decode(jsonString);
-  final List<dynamic> jsonProperties = jsonResponse['properties'];
-  return jsonProperties.map((json) => Property.fromJson(json)).toList();
-}
+  // Function to load properties from a JSON asset
+  Future<List<Property>> loadProperties() async {
+    final jsonString = await rootBundle.loadString('assets/properties.json');
+    final jsonResponse = json.decode(jsonString);
+    final List<dynamic> jsonProperties = jsonResponse['properties'];
+    return jsonProperties.map((json) => Property.fromJson(json)).toList();
+  }
 
   // Function to add a new player
   void _addNewPlayer(String playerName) {
@@ -103,12 +120,21 @@ Future<List<Property>> loadProperties() async {
     }
   }
 
-  // Function to handle buying houses on a property
+  // Function to handle buying houses or a hotel on a property
   void _buyHouse(Player player, Property property) {
     if (property.houseCost != null && player.money >= property.houseCost! && player.properties.contains(property)) {
       setState(() {
         player.money -= property.houseCost!;
-        // Here you might want to do something with the property, like add a house.
+        
+        // Check if the property can still have houses added, or if it's time for a hotel
+        if (property.numberOfHouses < 4) {
+          // Add a house if less than 4 houses
+          property.numberOfHouses++;
+        } else if (property.numberOfHouses == 4) {
+          // Convert to a hotel if 4 houses already present
+          // Assuming the game logic that 4 houses = 1 hotel
+          property.numberOfHouses = 5; // 5 could signify a hotel
+        }
       });
     }
   }

@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/monopoly_game.iml" filepath="$PROJECT_DIR$/monopoly_game.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/monopoly_game_android.iml" filepath="$PROJECT_DIR$/android/monopoly_game_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/monopoly_tracker.iml" filepath="$PROJECT_DIR$/.idea/monopoly_tracker.iml" />
     </modules>
   </component>
 </project>

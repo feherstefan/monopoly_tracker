@@ -1,7 +1,10 @@
+import 'player.dart';
+
 class Property {
   // Basic property details
   String name;
   String id;
+  String group; // Group the property belongs to
   int? position;
   int? price;
   int? rent;
@@ -15,6 +18,7 @@ class Property {
   Property({
     required this.name,
     required this.id,
+    required this.group,
     this.position,
     this.price,
     this.rent,
@@ -28,6 +32,7 @@ class Property {
     return Property(
       name: json['name'] as String,
       id: json['id'] as String,
+      group: json['group'] as String, // Ensure 'group' is included in your JSON
       position: json['position'] as int?,
       price: json['price'] as int?,
       rent: json['rent'] as int?,
@@ -42,7 +47,7 @@ class Property {
 
   // Method to calculate rent based on the number of houses
   int rentWithHouses(int numberOfHouses) {
-    if (numberOfHouses == 5) {
+    if (numberOfHouses == 5) { // Assuming 5 means a hotel
       return rentWithHotel;
     } else if (numberOfHouses > 0 && numberOfHouses <= 4) {
       return multipliedRent?[numberOfHouses - 1] ?? 0;
@@ -57,23 +62,27 @@ class Property {
     }
   }
 
-  // Method to mortgage the property
-  void mortgageProperty() {
-    if (!isMortgaged) {
+  // Method to handle the financial aspect of mortgaging a property
+  void mortgageProperty(Player player) {
+    if (!isMortgaged && mortgageValue != null) {
       isMortgaged = true;
+      player.money += mortgageValue!; // Adding mortgage value to player's money
+      // Notify listeners or update state as needed
     }
   }
 
-  // Method to unmortgage the property
-  void unmortgageProperty() {
-    if (isMortgaged) {
+  // Method to include a financial transaction in unmortgaging the property
+  void unmortgageProperty(Player player) {
+    if (isMortgaged && mortgageValue != null) {
       isMortgaged = false;
+      player.money -= mortgageValue!; // Deducting the mortgage value from player's money
+      // Here you might consider adding an additional interest or fee for unmortgaging
+      // Notify listeners or update state as needed
     }
   }
 
   // Logic to determine if a house can be built on this property
   bool get canBuild {
-    // Example: a house can be built if the property is not mortgaged and has fewer than 5 houses
     return !isMortgaged && numberOfHouses < 5;
   }
 
